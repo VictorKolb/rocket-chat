@@ -9,6 +9,7 @@ export default ({ req, reducers }) => {
         ? "http://localhost:7000/api"
         : "http://rocketchat.ru/api",
   });
+
   const middleware = applyMiddleware(thunk.withExtraArgument(axiosInstance));
 
   return createStore(reducers, middleware);

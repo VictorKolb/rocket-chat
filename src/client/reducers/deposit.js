@@ -1,11 +1,9 @@
-const initialState = null;
+const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case "GET_ARTIST":
+    case "GET_DEPOSIT":
       return action.payload;
-    case "CLEAR_ARTIST":
-      return null;
     default:
       return state;
   }

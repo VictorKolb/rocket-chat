@@ -2,15 +2,15 @@ import React from "react";
 import MainPage from "client/routes/MainPage";
 // import Artists, { loadArtistsPage } from "routes/artists";
 // import Artist, { loadArtistPage } from "routes/artist";
-// import Layout, { loadMainData } from "routes/layout";
+import Layout, { loadMainData } from "client/routes/layout";
 // import Profile, { loadProfilePage } from "routes/profile";
 import { Redirect } from "react-router-dom";
 
 export default function(user) {
   return [
     {
-      component: MainPage,
-      // loadData: loadMainData,
+      component: Layout,
+      loadData: loadMainData,
       routes: [
         {
           path: "/",
