@@ -4,14 +4,16 @@ import {
   Header,
   SubHeader,
   Wrapper,
+  IconContainer,
 } from "components/AccountItem/index.styled";
 import getCurrency from "helpers/strings/getCurrency";
 import getAnnualInterestYear from "helpers/strings/getAnnualInterestYear";
 import getDateString from "helpers/strings/getDateString";
 import ColoredNumberString from "components/ColoredNumberString";
+import Icon from "components/Icon";
 
 export default function({
-  type,
+  open,
   number,
   balance,
   currency,
@@ -22,6 +24,9 @@ export default function({
 }) {
   return (
     <Wrapper>
+      <IconContainer>
+        <Icon type={open ? "close" : "expand"} />
+      </IconContainer>
       <Header>№ {number}</Header>
       <SubHeader>
         <ColoredNumberString number={balance}>
@@ -32,13 +37,15 @@ export default function({
       <Caption>
         <b>{getDateString(new Date(creationDate), 0)}</b> — создан
       </Caption>
-      <Caption>
-        <b>{getDateString(new Date(dateOfTheLastOperation), 0)}</b> (
-        <ColoredNumberString withSymbol number={lastOperationSum}>
-          {getCurrency(lastOperationSum, currency)}
-        </ColoredNumberString>
-        ) — последняя
-      </Caption>
+      {!open && (
+        <Caption>
+          <b>{getDateString(new Date(dateOfTheLastOperation), 0)}</b> (
+          <ColoredNumberString withSymbol number={lastOperationSum}>
+            {getCurrency(lastOperationSum, currency)}
+          </ColoredNumberString>
+          ) — последняя
+        </Caption>
+      )}
     </Wrapper>
   );
 }

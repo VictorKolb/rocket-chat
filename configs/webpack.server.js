@@ -17,14 +17,6 @@ const config = {
   },
 
   externals: [webpackNodeExternals()],
-  module: {
-    rules: [
-      {
-        test: /\.(woff2?|ttf|eot|jpe?g|png|svg|gif)$/,
-        use: ["file-loader?name=[name].[hash:8].[ext]"],
-      },
-    ],
-  },
 
   plugins: [
     new webpack.DefinePlugin({

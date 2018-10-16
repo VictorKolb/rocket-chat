@@ -70,6 +70,27 @@ const common = {
           ],
         },
       },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              publicPath: "assets/",
+            },
+          },
+          {
+            loader: "svgo-loader",
+            options: {
+              plugins: [{ removeTitle: true }],
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff2?|ttf|eot|jpe?g|png|gif)$/,
+        use: ["file-loader?name=[name].[hash:8].[ext]"],
+      },
     ],
   },
 
