@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import getDateString from "helpers/strings/getDateString";
 import ColoredNumberString from "components/ColoredNumberString";
 import getCurrency from "helpers/strings/getCurrency";
@@ -8,6 +8,7 @@ import {
   Wrapper,
   Text,
   TextContainer,
+  Header,
 } from "components/HistoryOfOperation/index.styled";
 import Icon from "components/Icon";
 
@@ -20,10 +21,12 @@ function Operation({ date, sum, cardLastDigits, currency }) {
           <b>{getDateString(new Date(date), 0)}</b>
         </Caption>
         <Text>
-          <ColoredNumberString withSymbol number={sum}>
-            {getCurrency(sum, currency)}
-          </ColoredNumberString>{" "}
-          {isPositive ? "с карты" : "на карту"} **** {cardLastDigits}{" "}
+          <b>
+            <ColoredNumberString withSymbol number={sum}>
+              {getCurrency(sum, currency)}
+            </ColoredNumberString>{" "}
+          </b>
+          {isPositive ? "с карты" : "на карту"} **** <b>{cardLastDigits}</b>
         </Text>
       </TextContainer>
       <IconContainer>
@@ -34,7 +37,13 @@ function Operation({ date, sum, cardLastDigits, currency }) {
   );
 }
 export default function({ operations, currency }) {
-  return operations.map(operation => (
+  const operationItems = operations.map(operation => (
     <Operation key={operation.date} {...operation} currency={currency} />
   ));
+  return (
+    <Fragment>
+      <Header> История операций:</Header>
+      {operationItems}
+    </Fragment>
+  );
 }

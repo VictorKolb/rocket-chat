@@ -5,7 +5,7 @@ import AccountItem from "components/AccountItem";
 import HistoryOfOperation from "components/HistoryOfOperation";
 
 const Wrapper = styled.div`
-  max-width: 350px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,12 +15,12 @@ const Wrapper = styled.div`
 
 const account = {
   number: "45234623",
-  currency: "en",
+  currency: "ru",
   balance: 45000,
   annualInterestYear: 4.5,
   creationDate: 1518382800000,
   dateOfTheLastOperation: 1539669762141,
-  lastOperationSum: 2466,
+  lastOperationSum: 26226,
 };
 
 const operations = [
@@ -34,7 +34,7 @@ export default function() {
   return (
     <Wrapper>
       <Toggle />
-      <AccountItem open {...account} />
+      <AccountItem {...account} />
       <HistoryOfOperation operations={operations} currency="ru" />
     </Wrapper>
   );

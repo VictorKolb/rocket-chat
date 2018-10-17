@@ -3,7 +3,7 @@ import { colors } from "helpers/constants";
 
 export const Wrapper = styled.div`
   width: 100%;
-  max-width: 280px;
+  max-width: 320px;
   position: relative;
   padding: 15px 20px;
   border-bottom: 1px solid ${colors.lightGray};

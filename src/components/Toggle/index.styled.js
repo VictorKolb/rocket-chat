@@ -5,7 +5,7 @@ const { blue } = colors;
 
 export const Wrapper = styled.div`
   display: inline-flex;
-  max-width: 240px;
+  max-width: 280px;
   min-height: 36px;
   border: 1px solid ${blue};
   border-radius: 2px;
@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
 
 export const Button = styled.div`
   padding: 7px;
-  width: 120px;
+  width: 160px;
   text-align: center;
   cursor: default;
   background: ${props => (props.active ? blue : "transparent")};

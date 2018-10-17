@@ -1,8 +1,6 @@
-export default function(date, yearSlice = 2) {
-  return `${`0${date.getDate()}`.slice(-2)}.${`0${date.getMonth() + 1}`.slice(
-    -2,
-  )}.${date
-    .getFullYear()
-    .toString()
-    .slice(yearSlice)} | ${date.getHours()}:${date.getMinutes()}`;
+const days = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+export default function(date) {
+  return `${date.toLocaleDateString("ru-RU")} ${
+    days[date.getDay()]
+  } | ${date.toLocaleTimeString("ru-RU").slice(0, -3)}`;
 }

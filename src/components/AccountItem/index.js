@@ -40,9 +40,11 @@ export default function({
       {!open && (
         <Caption>
           <b>{getDateString(new Date(dateOfTheLastOperation), 0)}</b> (
-          <ColoredNumberString withSymbol number={lastOperationSum}>
-            {getCurrency(lastOperationSum, currency)}
-          </ColoredNumberString>
+          <b>
+            <ColoredNumberString withSymbol number={lastOperationSum}>
+              {getCurrency(lastOperationSum, currency)}
+            </ColoredNumberString>
+          </b>
           ) — последняя
         </Caption>
       )}

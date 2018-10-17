@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 280px;
+  max-width: 320px;
   position: relative;
   padding: 15px 20px;
   color: ${colors.coal};
@@ -29,4 +29,14 @@ export const Text = styled.div`
 
 export const TextContainer = styled.div`
   margin-right: 20px;
+`;
+
+export const Header = styled.div`
+  width: 280px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: left;
+  color: ${colors.coal};
 `;
