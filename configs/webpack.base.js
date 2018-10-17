@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const merge = require("webpack-merge");
 const path = require("path");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 
@@ -43,6 +44,10 @@ const common = {
       "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
     }),
     new WebpackNotifierPlugin(),
+    new CleanWebpackPlugin(["build", "public"], {
+      root: path.resolve("./"),
+      verbose: true,
+    }),
   ],
   module: {
     rules: [
@@ -76,7 +81,7 @@ const common = {
           {
             loader: "file-loader",
             options: {
-              publicPath: "assets/",
+              publicPath: "/assets/",
             },
           },
           {

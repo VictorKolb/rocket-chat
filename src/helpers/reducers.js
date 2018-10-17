@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import deposit from "client/reducers/deposit";
+import accountViewer from "client/reducers/accountViewer";
+import messages from "client/reducers/messages";
 
 export default combineReducers({
-  deposit,
+  accountViewer,
+  messages,
 });

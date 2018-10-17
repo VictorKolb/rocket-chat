@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Caption,
   Header,
@@ -21,15 +21,16 @@ export default function({
   creationDate,
   dateOfTheLastOperation,
   lastOperationSum,
+  actionLink,
 }) {
   return (
     <Wrapper>
-      <IconContainer>
+      <IconContainer to={actionLink}>
         <Icon type={open ? "close" : "expand"} />
       </IconContainer>
       <Header>№ {number}</Header>
       <SubHeader>
-        <ColoredNumberString number={balance}>
+        <ColoredNumberString withSymbol={balance < 0} number={balance}>
           {getCurrency(balance, currency)}
         </ColoredNumberString>
       </SubHeader>
@@ -39,13 +40,19 @@ export default function({
       </Caption>
       {!open && (
         <Caption>
-          <b>{getDateString(new Date(dateOfTheLastOperation), 0)}</b> (
-          <b>
-            <ColoredNumberString withSymbol number={lastOperationSum}>
-              {getCurrency(lastOperationSum, currency)}
-            </ColoredNumberString>
-          </b>
-          ) — последняя
+          {dateOfTheLastOperation ? (
+            <Fragment>
+              <b>{getDateString(new Date(dateOfTheLastOperation), 0)}</b> (
+              <b>
+                <ColoredNumberString withSymbol number={lastOperationSum}>
+                  {getCurrency(lastOperationSum, currency)}
+                </ColoredNumberString>
+              </b>
+              ) — последняя
+            </Fragment>
+          ) : (
+            "Не было операций"
+          )}
         </Caption>
       )}
     </Wrapper>

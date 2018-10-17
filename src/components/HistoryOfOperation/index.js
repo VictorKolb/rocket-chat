@@ -29,21 +29,22 @@ function Operation({ date, sum, cardLastDigits, currency }) {
           {isPositive ? "с карты" : "на карту"} **** <b>{cardLastDigits}</b>
         </Text>
       </TextContainer>
-      <IconContainer>
+      <IconContainer to="/support/accounts">
         <Icon type="message" />
       </IconContainer>
-      {/*{date}*/}
     </Wrapper>
   );
 }
-export default function({ operations, currency }) {
+export default function({ operations = [], currency }) {
   const operationItems = operations.map(operation => (
     <Operation key={operation.date} {...operation} currency={currency} />
   ));
-  return (
+  return operationItems.length ? (
     <Fragment>
       <Header> История операций:</Header>
       {operationItems}
     </Fragment>
+  ) : (
+    <Header>Не было операций</Header>
   );
 }

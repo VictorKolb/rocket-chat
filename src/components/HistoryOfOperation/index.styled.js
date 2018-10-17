@@ -5,8 +5,7 @@ import { colors } from "helpers/constants";
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 320px;
+  width: 320px;
   position: relative;
   padding: 15px 20px;
   color: ${colors.coal};
@@ -32,7 +31,8 @@ export const TextContainer = styled.div`
 `;
 
 export const Header = styled.div`
-  width: 280px;
+  width: 100%;
+  padding: 0 20px;
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 11px;

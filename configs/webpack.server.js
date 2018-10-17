@@ -13,6 +13,8 @@ const config = {
 
   output: {
     filename: "[name].js",
+    chunkFilename: "[name].[hash].js",
+
     path: path.resolve("./build"),
   },
 

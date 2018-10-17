@@ -1,13 +1,12 @@
 import React from "react";
 import { Wrapper, Button } from "components/Toggle/index.styled";
+import { Link } from "react-router-dom";
 
 export default function({ onClick }) {
   return (
     <Wrapper>
-      <Button active to="/cheta">
-        Счета
-      </Button>
-      <Button to="/deposits"> Вклады</Button>
+      <Button to="/support/accounts">Счета</Button>
+      <Button to="/support/deposits"> Вклады</Button>
     </Wrapper>
   );
 }

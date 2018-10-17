@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { colors } from "helpers/constants";
 const { blue } = colors;
 
@@ -13,27 +13,30 @@ export const Wrapper = styled.div`
   user-select: none;
 `;
 
-export const Button = styled.div`
+export const Button = styled(NavLink)`
   padding: 7px;
   width: 160px;
   text-align: center;
   cursor: default;
-  background: ${props => (props.active ? blue : "transparent")};
-  color: ${props => (props.active ? "white" : blue)};
+  background: transparent;
+  color: ${blue};
   transition: 0.2s;
 
-  ${props =>
-    !props.active &&
-    css`
-      &:hover {
-        cursor: pointer;
-        background: ${blue};
-        opacity: 0.7;
-        color: white;
-      }
+  &.active {
+    background: ${blue};
+    color: white;
+  }
 
-      &:active {
-        opacity: 0.5;
-      }
-    `};
+  &:not(.active) {
+    &:hover {
+      cursor: pointer;
+      background: ${blue};
+      opacity: 0.7;
+      color: white;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
 `;

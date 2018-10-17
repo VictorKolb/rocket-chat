@@ -5,17 +5,25 @@ import routes from "helpers/routes";
 import reducers from "helpers/reducers";
 import renderer from "helpers/renderer";
 import createStore from "helpers/createStore";
+import apiRouter from "server/apiRouter";
+import sockedIo from "socket.io";
+import { Server as S } from "http";
 const app = express();
+const server = S(app);
 
-// app.use(
-//   "/api",
-//   proxy("localhost:1337", {
-//     proxyReqOptDecorator(opts) {
-//       // opts.headers["x-forwarded-host"] = "localhost:7000";
-//       return opts;
-//     },
-//   }),
-// );
+const io = sockedIo(server);
+
+io.on("connection", function(socket) {
+  console.log("ололо");
+  // socket.emit("news", { hello: "world" });
+  socket.on("hello", function(data) {
+    console.log(data);
+  });
+
+  socket.emit("news", "werwer");
+});
+
+app.use("/api", apiRouter);
 
 app.get("/favicon.ico", (req, res) => {
   res.sendStatus(204);
@@ -41,7 +49,7 @@ app.get("*", (req, res) => {
     .catch(err => console.error(err));
 });
 
-app.listen(7000, () => {
+server.listen(7000, () => {
   console.log("Listening on port 7000");
 });
 
