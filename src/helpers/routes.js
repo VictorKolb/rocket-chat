@@ -10,7 +10,6 @@ import AllDeposits, {
 import AllAccounts, {
   loadAllAccountsData,
 } from "client/routes/AccountViewer/AllAccounts";
-import { Redirect } from "react-router-dom";
 
 export default function(user) {
   return [

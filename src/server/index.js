@@ -30,6 +30,7 @@ app.get("/favicon.ico", (req, res) => {
 });
 
 app.use(express.static(path.resolve("public")));
+app.use("/avatars", express.static(path.resolve("static")));
 
 app.get("*", (req, res) => {
   const store = createStore({

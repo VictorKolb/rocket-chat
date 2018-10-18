@@ -6,12 +6,27 @@ import {
   Container,
 } from "components/TextArea/index.styled";
 
-export default function() {
+export default function({
+  onTyping,
+  typedText,
+  sendMessage,
+  sendByCmdOrCtrlPlusEnter,
+}) {
   return (
     <Wrapper>
       <Container>
-        <TextArea placeholder="Сообщение" />
-        <Button>Отправить</Button>
+        <TextArea
+          onChange={onTyping}
+          onFocus={() => {
+            window.addEventListener("keydown", sendByCmdOrCtrlPlusEnter);
+          }}
+          onBlur={() => {
+            window.removeEventListener("keydown", sendByCmdOrCtrlPlusEnter);
+          }}
+          value={typedText}
+          placeholder="Сообщение"
+        />
+        <Button onClick={sendMessage}>Отправить</Button>
       </Container>
     </Wrapper>
   );

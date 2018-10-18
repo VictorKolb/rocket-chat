@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import { Message, MessageWrapper } from "components/Message/index.styled";
+import { Img, Message, MessageWrapper } from "components/Message/index.styled";
 
 export default class extends Component {
   constructor(props) {
@@ -11,13 +11,16 @@ export default class extends Component {
     this.props.last && this.messageRef.current.scrollIntoView();
   }
   render() {
-    const { content, userId, currentUserId, ref } = this.props;
+    const { content, userId, currentUserId, avatar, userName } = this.props;
     return (
       <MessageWrapper
         innerRef={this.messageRef}
         right={currentUserId === userId}
       >
-        <Message>{content}</Message>
+        <Img src={avatar} alt="" />
+        <Message>
+          <b>{userName}:</b> {content}
+        </Message>
       </MessageWrapper>
     );
   }

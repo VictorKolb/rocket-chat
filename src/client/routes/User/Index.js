@@ -1,11 +1,10 @@
 import React, { Fragment } from "react";
-
-import Chat from "client/routes/Chat";
+import Chat from "components/Chat";
 
 export default function() {
   return (
     <Fragment>
-      <Chat />
+      <Chat userId={1} />
     </Fragment>
   );
 }

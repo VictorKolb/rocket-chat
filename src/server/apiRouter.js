@@ -5,7 +5,7 @@ import {
   deposits,
   depositsOperations,
 } from "server/fakeAccountsDB";
-import { messages } from "server/fakeMessagesDB";
+import { messages, users } from "server/fakeMessagesDB";
 
 const router = express.Router();
 
@@ -63,6 +63,10 @@ router.get("/deposits/:number", async (req, res) => {
 
 router.get("/messages", async (req, res) => {
   res.json(messages);
+});
+
+router.get("/users", async (req, res) => {
+  res.json(users);
 });
 
 export default router;

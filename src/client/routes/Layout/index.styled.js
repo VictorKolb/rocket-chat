@@ -1,4 +1,5 @@
 import styled, { injectGlobal } from "styled-components";
+import { colors } from "helpers/constants";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ injectGlobal`
   body {
     min-height: 100%;
     position: relative;
-    color: #032740;
+    color: ${colors.coal};
   }
   
   * {

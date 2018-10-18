@@ -4,7 +4,7 @@ function randomDate(start, end) {
   );
 }
 
-function r() {
+export function r() {
   return randomDate(new Date(2012, 0, 1), new Date());
 }
 

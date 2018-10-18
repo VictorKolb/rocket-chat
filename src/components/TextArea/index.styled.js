@@ -17,8 +17,8 @@ export const Container = styled.div`
 export const TextArea = styled(Textarea)`
   border: 1px solid ${colors.lightGray};
   width: 100%;
-  min-height: 57px;
-  font-size: 16px;
+  min-height: 54px;
+  font-size: 14px;
   line-height: 1.6;
   color: ${colors.coal};
   padding: 15px;
@@ -38,7 +38,7 @@ export const Button = styled.button`
   padding: 10px;
   border: none;
   outline: none;
-  font-size: 11px;
+  font-size: 14px;
   border-radius: 2px;
   margin-top: 10px;
   cursor: pointer;
