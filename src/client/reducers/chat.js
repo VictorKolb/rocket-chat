@@ -11,8 +11,8 @@ export default function(state = initialState, action) {
     case "SEND_MESSAGE":
       return {
         ...state,
-        messages: [...state.messages, action.payload],
         typedText: "",
+        messages: action.payload,
       };
     default:
       return state;

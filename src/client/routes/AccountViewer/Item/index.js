@@ -6,6 +6,7 @@ import chatActions from "client/actions/chat";
 import AccountItem from "components/AccountItem";
 import HistoryOfOperation from "components/HistoryOfOperation";
 import Loader from "components/Loader";
+import socket from "helpers/socket.io";
 
 class Account extends PureComponent {
   componentDidMount() {
@@ -26,6 +27,7 @@ class Account extends PureComponent {
       type: "operation",
       content: operation,
     };
+    socket.emit("sendMessage");
     actions.sendMessage(message);
   };
 

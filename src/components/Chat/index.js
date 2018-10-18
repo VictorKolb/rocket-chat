@@ -10,6 +10,13 @@ import socket from "helpers/socket.io";
 socket.on("news", data => console.log(data));
 
 class Chat extends PureComponent {
+  constructor(props) {
+    super(props);
+    socket.on("sendMessage", () => {
+      this.props.actions.getMessages();
+    });
+  }
+
   async componentDidMount() {
     await this.props.actions.getUsers();
     await this.props.actions.getMessages();
@@ -30,7 +37,7 @@ class Chat extends PureComponent {
         type: "text",
         content: typedText,
       };
-
+      socket.emit("sendMessage");
       actions.sendMessage(message);
     }
   };

@@ -28,7 +28,7 @@ const sendMessage = message => async (dispatch, getState, axios) => {
   const { data: messages } = await axios("/messages");
 
   dispatch({
-    type: "GET_MESSAGES",
+    type: "SEND_MESSAGE",
     payload: messages,
   });
 };

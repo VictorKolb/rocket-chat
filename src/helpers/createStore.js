@@ -4,10 +4,7 @@ import axios from "axios";
 
 export default ({ req, reducers }) => {
   const axiosInstance = axios.create({
-    baseURL:
-      NODE_ENV === "development"
-        ? "http://localhost:7000/api"
-        : "http://rocketchat.ru/api",
+    baseURL: "http://localhost:7000/api",
   });
 
   const middleware = applyMiddleware(thunk.withExtraArgument(axiosInstance));

@@ -17,11 +17,10 @@ const io = sockedIo(server);
 io.on("connection", function(socket) {
   console.log("user is connecting");
 
-  // socket.on("hello", function(data) {
-  //   console.log(data);
-  // });
-
-  // socket.emit("news", "werwer");
+  socket.on("sendMessage", () => {
+    console.log("sendMessage");
+    socket.broadcast.emit("sendMessage");
+  });
 });
 
 app.use(bodyParser.json());
