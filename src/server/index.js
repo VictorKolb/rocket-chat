@@ -9,6 +9,10 @@ import createStore from "helpers/createStore";
 import apiRouter from "server/apiRouter";
 import sockedIo from "socket.io";
 import { Server as S } from "http";
+import intlPolyfill from "server/intlPolyfill";
+
+intlPolyfill();
+
 const app = express();
 const server = S(app);
 

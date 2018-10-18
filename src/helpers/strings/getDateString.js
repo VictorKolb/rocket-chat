@@ -1,6 +1,20 @@
-const days = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
 export default function(date) {
-  return `${date.toLocaleDateString("ru-RU")} ${
-    days[date.getDay()]
-  } | ${date.toLocaleTimeString("ru-RU").slice(0, -3)}`;
+  const timeFormat = new Intl.DateTimeFormat("ru-RU", {
+    hour: "numeric",
+    minute: "numeric",
+  });
+
+  const dateFormat = new Intl.DateTimeFormat("ru-RU", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+
+  const dayOfWeek = new Intl.DateTimeFormat("ru-RU", {
+    weekday: "short",
+  });
+
+  return `${dateFormat.format(date)} ${dayOfWeek.format(
+    date,
+  )} | ${timeFormat.format(date)}`;
 }
