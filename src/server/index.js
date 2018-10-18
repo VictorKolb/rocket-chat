@@ -52,7 +52,7 @@ app.get("*", (req, res) => {
 });
 
 server.listen(7000, () => {
-  console.log("Listening on port 7000");
+  console.log("→ http://localhost:7000");
 });
 
 app.use(function(req, res, next) {
