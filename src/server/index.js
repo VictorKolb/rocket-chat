@@ -18,8 +18,11 @@ io.on("connection", function(socket) {
   console.log("user is connecting");
 
   socket.on("sendMessage", () => {
-    console.log("sendMessage");
     socket.broadcast.emit("sendMessage");
+  });
+
+  socket.on("typing", () => {
+    socket.broadcast.emit("interlocutorIsTyping");
   });
 });
 

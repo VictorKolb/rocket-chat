@@ -1,4 +1,5 @@
 import React, { Fragment, PureComponent } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import accountViewerActions from "client/actions/accountViewer";
@@ -9,6 +10,12 @@ import Loader from "components/Loader";
 import socket from "helpers/socket.io";
 
 class Account extends PureComponent {
+  static propTypes = {
+    userId: PropTypes.number.isRequired,
+    actions: PropTypes.object.isRequired,
+    accountViewer: PropTypes.object.isRequired,
+  };
+
   componentDidMount() {
     const { actions, match, type } = this.props;
 

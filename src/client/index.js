@@ -6,7 +6,7 @@ import { renderRoutes } from "react-router-config";
 import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import axios from "axios";
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, compose } from "redux";
 import Routes from "helpers/routes";
 import reducers from "helpers/reducers";
 
@@ -14,16 +14,15 @@ const axiosInstance = axios.create({
   baseURL: "/api",
 });
 
-const logger = createLogger({
-  collapsed: true,
-});
-
-const middleware = applyMiddleware(
+const middleware = [
   thunk.withExtraArgument(axiosInstance),
-  logger,
-);
+  NODE_ENV === "development" && createLogger({ collapsed: true }),
+].filter(Boolean);
 
-const store = createStore(reducers, window.INITIAL_STATE, middleware);
+const store = compose(applyMiddleware(...middleware))(createStore)(
+  reducers,
+  window.INITIAL_STATE,
+);
 
 ReactDom.hydrate(
   <Provider store={store}>

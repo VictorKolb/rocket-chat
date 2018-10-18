@@ -1,4 +1,5 @@
 import React, { Fragment, PureComponent } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import accountViewerActions from "client/actions/accountViewer";
@@ -6,6 +7,11 @@ import AccountItem from "components/AccountItem";
 import Loader from "components/Loader";
 
 class AllAccounts extends PureComponent {
+  static propTypes = {
+    accountViewer: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+  };
+
   componentDidMount() {
     this.props.actions.getAccounts();
   }

@@ -19,3 +19,9 @@ export const Header = styled.div`
   opacity: 0.5;
   margin-bottom: 20px;
 `;
+
+export const IsTyping = styled.div`
+  text-align: center;
+  margin-bottom: 15px;
+  opacity: 0.5;
+`;

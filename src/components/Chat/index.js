@@ -1,4 +1,5 @@
 import React, { Fragment, PureComponent } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import chatActions from "client/actions/chat";
@@ -7,13 +8,24 @@ import TextArea from "components/TextArea";
 import Messages from "components/Messages";
 import socket from "helpers/socket.io";
 
-socket.on("news", data => console.log(data));
-
 class Chat extends PureComponent {
+  static propTypes = {
+    actions: PropTypes.object.isRequired,
+    userId: PropTypes.number.isRequired,
+    chat: PropTypes.object.isRequired,
+  };
+
   constructor(props) {
     super(props);
+    this.state = {
+      interlocutorIsTyping: false,
+    };
     socket.on("sendMessage", () => {
       this.props.actions.getMessages();
+    });
+
+    socket.on("interlocutorIsTyping", () => {
+      this.onInterlocutorTyping();
     });
   }
 
@@ -22,7 +34,19 @@ class Chat extends PureComponent {
     await this.props.actions.getMessages();
   }
 
+  onInterlocutorTyping = () => {
+    this.setState({ interlocutorIsTyping: true });
+    if (typeof window !== "undefined") {
+      clearTimeout(window.interlocutorIsTypingTimeout);
+      window.interlocutorIsTypingTimeout = setTimeout(() => {
+        this.setState({ interlocutorIsTyping: false });
+      }, 3000);
+    }
+  };
+
   onTyping = e => {
+    socket.emit("typing");
+
     this.props.actions.onTyping(e.target.value);
   };
 
@@ -52,9 +76,16 @@ class Chat extends PureComponent {
   render() {
     const { messages, typedText, users } = this.props.chat;
     const { userId } = this.props;
+    const { interlocutorIsTyping } = this.state;
+
     return (
       <Wrapper>
-        <Messages messages={messages} users={users} currentUserId={userId} />
+        <Messages
+          interlocutorIsTyping={interlocutorIsTyping}
+          messages={messages}
+          users={users}
+          currentUserId={userId}
+        />
         <TextArea
           onTyping={this.onTyping}
           typedText={typedText}

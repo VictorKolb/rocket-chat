@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   Caption,
   Header,
@@ -12,7 +13,7 @@ import getDateString from "helpers/strings/getDateString";
 import ColoredNumberString from "components/ColoredNumberString";
 import Icon from "components/Icon";
 
-export default function({
+export default function AccountItem({
   open,
   number,
   balance,
@@ -58,3 +59,21 @@ export default function({
     </Wrapper>
   );
 }
+
+AccountItem.propTypes = {
+  open: PropTypes.bool,
+  number: PropTypes.number.isRequired,
+  balance: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
+  annualInterestYear: PropTypes.number.isRequired,
+  creationDate: PropTypes.number.isRequired,
+  dateOfTheLastOperation: PropTypes.number,
+  lastOperationSum: PropTypes.number,
+  actionLink: PropTypes.string.isRequired,
+};
+
+AccountItem.defaultProps = {
+  dateOfTheLastOperation: null,
+  lastOperationSum: null,
+  open: false,
+};

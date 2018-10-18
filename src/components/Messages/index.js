@@ -1,15 +1,24 @@
 import React, { PureComponent, createRef } from "react";
+import PropTypes from "prop-types";
 import {
   Container,
   Group,
   Wrapper,
   Header,
+  IsTyping,
 } from "components/Messages/index.styled";
 import Message from "components/Message";
 
 export default class extends PureComponent {
+  static propTypes = {
+    messages: PropTypes.object.isRequired,
+    currentUserId: PropTypes.number.isRequired,
+    users: PropTypes.object.isRequired,
+    interlocutorIsTyping: PropTypes.bool.isRequired,
+  };
+
   render() {
-    const { messages, currentUserId, users } = this.props;
+    const { messages, currentUserId, users, interlocutorIsTyping } = this.props;
     const messagesItems = [];
     const messagesArray = Object.keys(messages);
 
@@ -38,7 +47,10 @@ export default class extends PureComponent {
 
     return (
       <Wrapper>
-        <Container>{messagesItems}</Container>
+        <Container>
+          {messagesItems}
+          {interlocutorIsTyping && <IsTyping>Собеседник печатает...</IsTyping>}
+        </Container>
       </Wrapper>
     );
   }

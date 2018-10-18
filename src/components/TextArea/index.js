@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   TextArea,
   Wrapper,
@@ -6,7 +7,7 @@ import {
   Container,
 } from "components/TextArea/index.styled";
 
-export default function({
+export default function T({
   onTyping,
   typedText,
   sendMessage,
@@ -31,3 +32,10 @@ export default function({
     </Wrapper>
   );
 }
+
+T.propsTypes = {
+  onTyping: PropTypes.func.isRequired,
+  typedText: PropTypes.string.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  sendByCmdOrCtrlPlusEnter: PropTypes.func.isRequired,
+};
