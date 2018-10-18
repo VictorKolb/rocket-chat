@@ -2,6 +2,7 @@ import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import accountViewerActions from "client/actions/accountViewer";
+import chatActions from "client/actions/chat";
 import AccountItem from "components/AccountItem";
 import HistoryOfOperation from "components/HistoryOfOperation";
 import Loader from "components/Loader";
@@ -17,6 +18,17 @@ class Account extends PureComponent {
     this.props.actions.closeItem();
   }
 
+  sendOperation = operation => {
+    const { userId, actions } = this.props;
+    const message = {
+      userId: userId,
+      date: Date.now(),
+      type: "operation",
+      content: operation,
+    };
+    actions.sendMessage(message);
+  };
+
   render() {
     const { type, accountViewer } = this.props;
     const { openedItem } = accountViewer;
@@ -30,7 +42,11 @@ class Account extends PureComponent {
             {...openedItem}
             actionLink={`/support/${type}/`}
           />
-          <HistoryOfOperation currency={currency} operations={operations} />
+          <HistoryOfOperation
+            currency={currency}
+            operations={operations}
+            sendOperation={this.sendOperation}
+          />
         </Fragment>
       );
     } else return <Loader />;
@@ -42,7 +58,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...accountViewerActions }, dispatch),
+  actions: bindActionCreators(
+    { ...accountViewerActions, ...chatActions },
+    dispatch,
+  ),
 });
 
 export async function loadItemData(store, match, type) {

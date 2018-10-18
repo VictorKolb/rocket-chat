@@ -1,0 +1,73 @@
+[
+  {
+    "type": "text",
+    "userId": 1,
+    "date": 1496741356928,
+    "content": "привет как дела"
+  },
+  {
+    "type": "text",
+    "userId": 1,
+    "date": 1538886474053,
+    "content": "До вечера должен оклематься"
+  },
+  {
+    "type": "operation",
+    "userId": 2,
+    "date": 1539855761583,
+    "content": {
+      "date": 1539855761583,
+      "sum": 135,
+      "cardLastDigits": 4355,
+      "currency": "ru"
+    }
+  },
+  {
+    "userId": 2,
+    "date": 1539859942366,
+    "type": "text",
+    "content": "привет, пёс"
+  },
+  {
+    "userId": 2,
+    "date": 1539859943929,
+    "type": "text",
+    "content": "привет, пёс"
+  },
+  {
+    "userId": 2,
+    "date": 1539859986857,
+    "type": "text",
+    "content": "ыаываы"
+  },
+  {
+    "userId": 2,
+    "date": 1539860017266,
+    "type": "text",
+    "content": "ыва ыва "
+  },
+  {
+    "userId": 1,
+    "date": 1539860028334,
+    "type": "text",
+    "content": "хуй пизда"
+  },
+  {
+    "userId": 2,
+    "date": 1539860044187,
+    "type": "operation",
+    "content": {
+      "date": 1501110035820,
+      "sum": 135,
+      "cardLastDigits": 4355,
+      "number": 45234623,
+      "currency": "ru"
+    }
+  },
+  {
+    "userId": 2,
+    "date": 1539860109905,
+    "type": "text",
+    "content": " ajkf slkdfj askldfj "
+  }
+]

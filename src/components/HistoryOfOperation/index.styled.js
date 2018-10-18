@@ -5,9 +5,9 @@ import { colors } from "helpers/constants";
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 320px;
+  width: ${props => (props.inChat ? "auto" : "320px")};
   position: relative;
-  padding: 15px 20px;
+  padding: ${props => (props.inChat ? "0" : "15px 20px")};
   color: ${colors.coal};
 
   &:nth-child(even) {
@@ -15,11 +15,20 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const IconContainer = styled(I)`
+export const IconContainer = styled.div`
   margin-left: auto;
   position: relative;
-  right: auto;
-  top: auto;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
 `;
 
 export const Text = styled.div`

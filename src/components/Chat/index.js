@@ -1,8 +1,8 @@
 import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import messagesActions from "client/actions/messages";
-import { Wrapper, Container } from "client/routes/Chat/index.styled";
+import chatActions from "client/actions/chat";
+import { Wrapper, Container } from "components/Chat/index.styled";
 import TextArea from "components/TextArea";
 import Messages from "components/Messages";
 import socket from "helpers/socket.io";
@@ -20,16 +20,19 @@ class Chat extends PureComponent {
   };
 
   sendMessage = () => {
-    const { userId, messages, actions } = this.props;
+    const { userId, chat, actions } = this.props;
+    const { typedText } = chat;
 
-    const message = {
-      userId: userId,
-      date: Date.now(),
-      type: "text",
-      content: messages.typedText,
-    };
+    if (typedText.length) {
+      const message = {
+        userId: userId,
+        date: Date.now(),
+        type: "text",
+        content: typedText,
+      };
 
-    actions.sendMessage(message);
+      actions.sendMessage(message);
+    }
   };
 
   sendByCmdOrCtrlPlusEnter = e => {
@@ -40,7 +43,7 @@ class Chat extends PureComponent {
   };
 
   render() {
-    const { messages, typedText, users } = this.props.messages;
+    const { messages, typedText, users } = this.props.chat;
     const { userId } = this.props;
     return (
       <Wrapper>
@@ -57,15 +60,15 @@ class Chat extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  messages: state.messages,
+  chat: state.chat,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...messagesActions }, dispatch),
+  actions: bindActionCreators({ ...chatActions }, dispatch),
 });
 
 export async function loadAllAccountsData(store) {
-  await store.dispatch(messagesActions.getMessages());
+  await store.dispatch(chatActions.getMessages());
   return Promise.resolve;
 }
 

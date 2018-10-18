@@ -18,7 +18,7 @@ const config = {
   },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       TARGET: JSON.stringify("browser"),
     }),

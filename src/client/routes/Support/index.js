@@ -10,7 +10,7 @@ export default function({ route }) {
       <Chat userId={2} />
       <Wrapper>
         <Toggle />
-        {renderRoutes(route.routes)}
+        {renderRoutes(route.routes, { userId: 2 })}
       </Wrapper>
     </Fragment>
   );

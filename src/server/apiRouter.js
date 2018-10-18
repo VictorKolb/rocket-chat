@@ -4,15 +4,38 @@ import {
   accountsOperations,
   deposits,
   depositsOperations,
+  users,
 } from "server/fakeAccountsDB";
-import { messages, users } from "server/fakeMessagesDB";
+import fs from "fs";
+import path from "path";
 
 const router = express.Router();
+const fakeMessagesDBPath = path.resolve("./static/fakeMessagesDB.json");
+
+function sortByDate(items) {
+  return items.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
 
 function getOperations(number, operations) {
-  return operations
-    .filter(operation => +operation.number === +number)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  return sortByDate(
+    operations.filter(operation => +operation.number === +number),
+  );
+}
+
+function groupByDay(messages) {
+  const byDay = {};
+  messages.forEach(value => {
+    const date = new Date(value.date);
+
+    const dateString = `${`0${date.getDate()}`.slice(
+      -2,
+    )}.${`0${date.getMonth() + 1}`.slice(-2)}.${date.getFullYear().toString()}`;
+
+    byDay[dateString] = byDay[dateString] || [];
+    byDay[dateString].push(value);
+  });
+
+  return byDay;
 }
 
 function getLastOperations(items, operations) {
@@ -31,6 +54,10 @@ function getLastOperations(items, operations) {
 
 function getItem(number, items) {
   return items.find(item => +item.number === +number);
+}
+
+function getMessages() {
+  return fs.readFileSync(fakeMessagesDBPath, "utf8");
 }
 
 router.get("/test", async (req, res) => {
@@ -62,11 +89,21 @@ router.get("/deposits/:number", async (req, res) => {
 });
 
 router.get("/messages", async (req, res) => {
-  res.json(messages);
+  const messages = getMessages();
+
+  res.json(groupByDay(JSON.parse(messages)));
 });
 
 router.get("/users", async (req, res) => {
   res.json(users);
+});
+
+router.post("/send-message", async (req, res) => {
+  const oldMessages = JSON.parse(getMessages());
+  const newMessages = [...oldMessages, req.body];
+  fs.writeFileSync(fakeMessagesDBPath, JSON.stringify(newMessages), "utf8");
+
+  res.json(newMessages);
 });
 
 export default router;

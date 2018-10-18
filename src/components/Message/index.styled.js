@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Message = styled.div`
   display: inline-block;
-  padding: 10px;
+  padding: 20px;
   border-radius: 2px;
   background: white;
   box-shadow: 0 2px 8px 0 #d0d0d0;

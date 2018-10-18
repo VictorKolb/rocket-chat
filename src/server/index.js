@@ -1,5 +1,6 @@
 import path from "path";
 import express from "express";
+import bodyParser from "body-parser";
 import { matchRoutes } from "react-router-config";
 import routes from "helpers/routes";
 import reducers from "helpers/reducers";
@@ -14,15 +15,16 @@ const server = S(app);
 const io = sockedIo(server);
 
 io.on("connection", function(socket) {
-  console.log("ололо");
-  // socket.emit("news", { hello: "world" });
-  socket.on("hello", function(data) {
-    console.log(data);
-  });
+  console.log("user is connecting");
 
-  socket.emit("news", "werwer");
+  // socket.on("hello", function(data) {
+  //   console.log(data);
+  // });
+
+  // socket.emit("news", "werwer");
 });
 
+app.use(bodyParser.json());
 app.use("/api", apiRouter);
 
 app.get("/favicon.ico", (req, res) => {

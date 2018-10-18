@@ -9,3 +9,13 @@ export const Container = styled.div`
   width: 100%;
   margin: 40px auto 0;
 `;
+
+export const Group = styled.div`
+  margin-top: 20px;
+`;
+
+export const Header = styled.div`
+  text-align: center;
+  opacity: 0.5;
+  margin-bottom: 20px;
+`;

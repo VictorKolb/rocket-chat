@@ -24,11 +24,12 @@ function onTyping(value) {
 }
 
 const sendMessage = message => async (dispatch, getState, axios) => {
-  // const { data: users } = await axios("/users");
+  await axios.post("/send-message", message);
+  const { data: messages } = await axios("/messages");
 
   dispatch({
-    type: "SEND_MESSAGE",
-    payload: message,
+    type: "GET_MESSAGES",
+    payload: messages,
   });
 };
 

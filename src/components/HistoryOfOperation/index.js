@@ -12,10 +12,17 @@ import {
 } from "components/HistoryOfOperation/index.styled";
 import Icon from "components/Icon";
 
-function Operation({ date, sum, cardLastDigits, currency }) {
+export function Operation({
+  date,
+  sum,
+  cardLastDigits,
+  currency,
+  inChat,
+  sendOperation,
+}) {
   const isPositive = sum > 0;
   return (
-    <Wrapper>
+    <Wrapper inChat={inChat}>
       <TextContainer>
         <Caption>
           <b>{getDateString(new Date(date), 0)}</b>
@@ -29,15 +36,22 @@ function Operation({ date, sum, cardLastDigits, currency }) {
           {isPositive ? "с карты" : "на карту"} **** <b>{cardLastDigits}</b>
         </Text>
       </TextContainer>
-      <IconContainer to="/support/accounts">
-        <Icon type="message" />
-      </IconContainer>
+      {!inChat && (
+        <IconContainer onClick={sendOperation}>
+          <Icon type="message" />
+        </IconContainer>
+      )}
     </Wrapper>
   );
 }
-export default function({ operations = [], currency }) {
+export default function({ operations = [], currency, sendOperation }) {
   const operationItems = operations.map(operation => (
-    <Operation key={operation.date} {...operation} currency={currency} />
+    <Operation
+      key={operation.date}
+      {...operation}
+      currency={currency}
+      sendOperation={() => sendOperation({ ...operation, currency })}
+    />
   ));
   return operationItems.length ? (
     <Fragment>

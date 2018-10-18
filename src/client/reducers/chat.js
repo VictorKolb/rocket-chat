@@ -1,4 +1,4 @@
-const initialState = { messages: [], typedText: "", users: {} };
+const initialState = { messages: {}, typedText: "", users: {} };
 
 export default function(state = initialState, action) {
   switch (action.type) {

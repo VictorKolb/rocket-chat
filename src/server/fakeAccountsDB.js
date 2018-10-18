@@ -78,3 +78,14 @@ export const depositsOperations = [
   { date: 1539669362143, sum: -332315, cardLastDigits: 4355, number: 45234221 },
   { date: 1539669362143, sum: -315, cardLastDigits: 4355, number: 45234221 },
 ];
+
+export const users = {
+  1: {
+    name: "Евгений",
+    avatarUrl: "/avatars/1.jpg",
+  },
+  2: {
+    name: "Мария",
+    avatarUrl: "/avatars/2.jpg",
+  },
+};
