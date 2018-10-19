@@ -77,7 +77,6 @@ export async function loadItemData(store, match, type) {
   await store.dispatch(
     accountViewerActions.openItem(match.params.number, type),
   );
-  return Promise.resolve;
 }
 
 export default connect(

@@ -6,12 +6,14 @@ import {
   Button,
   Container,
 } from "components/TextArea/index.styled";
+import { Loader } from "components/Loader/index.styled";
 
 export default function T({
   onTyping,
   typedText,
   sendMessage,
   sendByCmdOrCtrlPlusEnter,
+  isSending,
 }) {
   return (
     <Wrapper>
@@ -25,9 +27,13 @@ export default function T({
             window.removeEventListener("keydown", sendByCmdOrCtrlPlusEnter);
           }}
           value={typedText}
+          disabled={isSending}
           placeholder="Сообщение"
         />
-        <Button onClick={sendMessage}>Отправить</Button>
+        <Button disabled={isSending} onClick={sendMessage}>
+          Отправить
+          {isSending && <Loader />}
+        </Button>
       </Container>
     </Wrapper>
   );

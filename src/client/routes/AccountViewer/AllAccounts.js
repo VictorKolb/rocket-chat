@@ -41,7 +41,6 @@ const mapDispatchToProps = dispatch => ({
 
 export async function loadAllAccountsData(store, match) {
   await store.dispatch(accountViewerActions.getAccounts());
-  return Promise.resolve;
 }
 
 export default connect(

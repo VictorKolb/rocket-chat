@@ -30,6 +30,10 @@ export const TextArea = styled(Textarea)`
   &:focus {
     border-color: ${colors.blue};
   }
+
+  &:disabled {
+    opacity: 0.7;
+  }
 `;
 
 export const Button = styled.button`

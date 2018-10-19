@@ -19,6 +19,7 @@ class Chat extends PureComponent {
     super(props);
     this.state = {
       interlocutorIsTyping: false,
+      isSending: false,
     };
     socket.on("sendMessage", () => {
       this.props.actions.getMessages();
@@ -50,19 +51,23 @@ class Chat extends PureComponent {
     this.props.actions.onTyping(e.target.value);
   };
 
-  sendMessage = () => {
+  sendMessage = async () => {
     const { userId, chat, actions } = this.props;
+    const { isSending } = this.state;
     const { typedText } = chat;
 
-    if (typedText.length) {
+    if (typedText.length && !isSending) {
       const message = {
         userId: userId,
         date: Date.now(),
         type: "text",
         content: typedText,
       };
+
+      await this.setState({ ...this.state, isSending: true });
       socket.emit("sendMessage");
-      actions.sendMessage(message);
+      await actions.sendMessage(message);
+      this.setState({ ...this.state, isSending: false });
     }
   };
 
@@ -76,7 +81,7 @@ class Chat extends PureComponent {
   render() {
     const { messages, typedText, users } = this.props.chat;
     const { userId } = this.props;
-    const { interlocutorIsTyping } = this.state;
+    const { interlocutorIsTyping, isSending } = this.state;
 
     return (
       <Wrapper>
@@ -91,6 +96,7 @@ class Chat extends PureComponent {
           typedText={typedText}
           sendMessage={this.sendMessage}
           sendByCmdOrCtrlPlusEnter={this.sendByCmdOrCtrlPlusEnter}
+          isSending={isSending}
         />
       </Wrapper>
     );
@@ -107,7 +113,6 @@ const mapDispatchToProps = dispatch => ({
 
 export async function loadAllAccountsData(store) {
   await store.dispatch(chatActions.getMessages());
-  return Promise.resolve;
 }
 
 export default connect(

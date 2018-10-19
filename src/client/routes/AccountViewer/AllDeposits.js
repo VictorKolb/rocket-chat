@@ -42,7 +42,6 @@ const mapDispatchToProps = dispatch => ({
 
 export async function loadAllDepositsData(store) {
   await store.dispatch(accountViewerActions.getDeposits());
-  return Promise.resolve;
 }
 
 export default connect(

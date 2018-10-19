@@ -25,11 +25,13 @@ function getOperations(number, operations) {
 function groupByDay(messages) {
   const byDay = {};
   messages.forEach(value => {
-    const date = new Date(value.date);
+    const dateFormat = new Intl.DateTimeFormat("ru-RU", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
 
-    const dateString = `${`0${date.getDate()}`.slice(
-      -2,
-    )}.${`0${date.getMonth() + 1}`.slice(-2)}.${date.getFullYear().toString()}`;
+    const dateString = dateFormat.format(value.date);
 
     byDay[dateString] = byDay[dateString] || [];
     byDay[dateString].push(value);
